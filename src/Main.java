@@ -5,7 +5,8 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        long zacetekT1 = System.currentTimeMillis();
+
+       // dodat moram time in milis ampak ne vem kko merit ker pac smo odvisni od nasega inputa
         Scanner scanner = new Scanner(System.in);
         System.out.println("--------------------------------");
 
@@ -20,19 +21,23 @@ public class Main {
             scanner.nextLine();
             System.out.print("Vpisi besedilo; ");
             String text = scanner.nextLine();
+
             narediVseInput(n, text);
 
         }
         else{
             System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
             int n = scanner.nextInt();
+
             narediVseTxt(n);
         }
 
         scanner.close();
-        long zacetekT2 = System.currentTimeMillis();
-        System.out.println("Celoten proces je trajal: " + (zacetekT2 - zacetekT1) + " ms");
+        long maxHeapSize = Runtime.getRuntime().maxMemory();
+        System.out.println("Max Heap Size: " + (maxHeapSize / (1024 * 1024)) + " MB");
+
     }
+
 
 
     /**
@@ -77,7 +82,7 @@ public class Main {
      */
     public static String preberiIzTxt() {
         // kle damo path do file-a ki vsebuje besedilo
-        Path filePath = Path.of("resources/maloTeksta.txt");
+        Path filePath = Path.of("resources/123MB.txt");
         try {
             return Files.readString(filePath);
 
