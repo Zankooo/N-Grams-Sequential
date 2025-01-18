@@ -70,16 +70,16 @@ public class Main {
         izpisiSekvencoInPonovitve(prestete);
         System.out.println("--------------------------------");
     }
-
+    /**
+     * FUNKCIJA preberi txt file
+     * prebere besedilo iz txt file-a in ga shrani v String
+     * @return vrne besedilo iz txt file kot String
+     */
     public static String preberiIzTxt() {
         // kle damo path do file-a ki vsebuje besedilo
-        Path filePath = Path.of("================================");
+        Path filePath = Path.of("resources/maloTeksta.txt");
         try {
-            // Read the file content as a single string
-            String besedilo = Files.readString(filePath);
-            // Print the content or save it in a variable
-            System.out.println("Prebrano besedilo:\n" + besedilo);
-            return besedilo;
+            return Files.readString(filePath);
 
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
