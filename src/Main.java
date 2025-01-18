@@ -1,0 +1,165 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        long zacetekT1 = System.currentTimeMillis();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("--------------------------------");
+
+
+        System.out.println("1. Bos vpisal besedilo");
+        System.out.println("2. Bos bral iz external file-a: ");
+        System.out.println();
+        int kaj = scanner.nextInt();
+        if (kaj == 1){
+            System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
+            int n = scanner.nextInt();
+            scanner.nextLine();
+            System.out.print("Vpisi besedilo; ");
+            String text = scanner.nextLine();
+            narediVseInput(n, text);
+
+        }
+        else{
+            System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
+            int n = scanner.nextInt();
+            narediVseTxt(n);
+        }
+
+        scanner.close();
+        long zacetekT2 = System.currentTimeMillis();
+        System.out.println("Celoten proces je trajal: " + (zacetekT2 - zacetekT1) + " ms");
+    }
+
+
+    /**
+     * FUNKCIJA narediVseTxt
+     * funkcija ki naredi vse za besedilo iz txt file-a
+     * ker bi morali vsako funkcijo posebej klicat in potem skranjevat v vmesne variablese je fajn
+     * ce imamo samo eno funkcijo ki klice vse. Torej uporabimo to funkcijo in ona klice vse ostale in toj to
+     * @param n . Dolzina n grama
+     */
+    public static void narediVseTxt(int n){
+        System.out.println("--------------------------------");
+        System.out.println("Tole so sekvence vseh n-gramov in ponovitve vsakega n-grama v besedilu: ");
+        String prebrano = preberiIzTxt();
+        List<String> nGrams = generateNGrams(n, prebrano);
+        List<String> cleaned = odstraniZnakce(nGrams);
+        Map<String, Integer> prestete = prestejPonovitve(cleaned);
+        izpisiSekvencoInPonovitve(prestete);
+        System.out.println("--------------------------------");
+    }
+    /**
+     * FUNKCIJA narediVseInput
+     * funkcija ki naredi vse za besedilo, ki ga vpisemo kot input scanner fora
+     * ker bi morali vsako funkcijo posebej klicat in potem skranjevat v vmesne variablese je fajn
+     * ce imamo samo eno funkcijo ki klice vse. Torej uporabimo to funkcijo in ona klice vse ostale in toj to
+     * @param n . Dolzina n grama
+     * @param besedilo Besedilo iz katerega bomo delali n-grame
+     */
+
+    public static void narediVseInput(int n, String besedilo){
+        System.out.println("--------------------------------");
+        System.out.println("Tole so sekvence vseh n-gramov in ponovitve vsakega n-grama v besedilu: ");
+        List<String> nGrams = generateNGrams(n, besedilo);
+        List<String> cleaned = odstraniZnakce(nGrams);
+        Map<String, Integer> prestete = prestejPonovitve(cleaned);
+        izpisiSekvencoInPonovitve(prestete);
+        System.out.println("--------------------------------");
+    }
+
+    public static String preberiIzTxt() {
+        // kle damo path do file-a ki vsebuje besedilo
+        Path filePath = Path.of("================================");
+        try {
+            // Read the file content as a single string
+            String besedilo = Files.readString(filePath);
+            // Print the content or save it in a variable
+            System.out.println("Prebrano besedilo:\n" + besedilo);
+            return besedilo;
+
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+        return "napaka, pri branju besed iz file-a";
+    }
+
+    /**
+     * FUNKCIJA generateNGrams
+     * Ustvari n-grame
+     * @param n Dolzina n-gramov (koliko besed naj bo v enem delcku)
+     * @param text Besedilo na podlagi katerega ustvarimo n-grame
+     * @return A StringBuilder n gramov.
+     */
+    public static List<String> generateNGrams(int n, String text) {
+        //ustvarimo listo za ngrame
+        List<String> nGrams = new ArrayList<>();
+        //vsak element v textu je sedaj element v array stringu.
+        // splitamo text po presledku, torej vsaka beseda gre na svoj index v array stringov
+        String[] words = text.split(" ");
+        // preverjamo ce je n pravi, ce ni, koncamo program.
+        // in pravi ni ko je manjsi ali enak 0, 0gram ne obstaja, in ce je n vecji od dolzine vseh besed
+        if (n <= 0 || n > words.length) {
+            System.out.println("Invalid n value. Ensure n > 0 and less than or equal to the number of words in the text.");
+            return nGrams;
+        }
+        for (int i = 0; i <= words.length - n; i++) {
+            StringBuilder nGram = new StringBuilder();
+            for (int j = 0; j < n; j++) {
+                nGram.append(words[i + j]);
+                if (j < n - 1) {
+                    nGram.append(" ");
+                }
+            }
+            nGrams.add(nGram.toString());
+        }
+        return nGrams;
+    }
+    /**
+     * FUNKCIJA odstraniZnakce
+     * Ker mi samo splitamo samo po " ", se lahko v sekvencah pojavijo klicaji, dvopicja, vprasaji, vejice
+     * Primer: "lep dan." ali "lep dan!"
+     * Torej ta funkcija odstrani vse te neuporabne znakce; vejice in pike in klicaje in vprasaje...
+     * @param list List teh vseh sekvenc oziroma v nasem primeru bodo to n-grami
+     * @return a Map <String, Integer> list teh sekvenc brez teh znakcov
+     */
+    public static List<String> odstraniZnakce(List<String> list) {
+        List<String> cleanedStrings = new ArrayList<>();
+        for (String signs : list) {
+            // Remove punctuation using regex
+            String cleaned = signs.replaceAll("[.,!?;:¡¿]", "");
+            cleanedStrings.add(cleaned);
+        }
+        return cleanedStrings;
+    }
+
+    /**
+     * FUNKCIJA prestejPonovitve
+     * Presteje kolikokrat se vsaka sekvenca ponovi
+     * @param list List teh vseh sekvenc oziroma v nasem primeru bodo to n-grami
+     * @return a Map <String, Integer> counts ki vsebuje frekvenco (kolikokrat se ponovi) vsakege/a sekvence/a.
+     */
+    public static Map<String, Integer> prestejPonovitve(List<String> list) {
+        Map<String, Integer> counts = new HashMap<>();
+        for (String element : list) {
+            counts.put(element, counts.getOrDefault(element, 0) + 1);
+        }
+        return counts;
+    }
+
+    /**
+     * FUNKCIJA izpisiSekvencoInPonovitve
+     * Funkcija ki v for loopu sprinta dejansko vse pojavitve vsake frekvence
+     * @param  counts Torej frekvence vseh sekvenc, basically output funkcije countOccurences
+     */
+    public static void izpisiSekvencoInPonovitve(Map<String, Integer> counts) {
+        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+
+}
+
