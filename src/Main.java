@@ -5,15 +5,20 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-       // dodat moram time in milis ampak ne vem kko merit ker pac smo odvisni od nasega inputa
+        long maxHeapSize = Runtime.getRuntime().maxMemory();
+        System.out.println("Max Heap Size: " + (maxHeapSize / (1024 * 1024)) + " MB");
+
+        // dodat moram time in milis ampak ne vem kko merit ker pac smo odvisni od nasega inputa
         Scanner scanner = new Scanner(System.in);
         System.out.println("--------------------------------");
+
+
         System.out.println("1. Bos vpisal besedilo");
         System.out.println("2. Bos bral iz external file-a: ");
         System.out.println();
         int kaj = scanner.nextInt();
         if (kaj == 1){
-            System.out.print("Vpisi zeljeno dolzino n-gramov - n: ");
+            System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
             int n = scanner.nextInt();
             scanner.nextLine();
             System.out.print("Vpisi besedilo; ");
@@ -21,13 +26,11 @@ public class Main {
             narediVseInput(n, text);
         }
         else{
-            System.out.print("Vpisi zeljeno dolzino n-gramov - n: ");
+            System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
             int n = scanner.nextInt();
             narediVseTxt(n);
         }
         scanner.close();
-        long maxHeapSize = Runtime.getRuntime().maxMemory();
-        System.out.println("Maksimalnen heap space je: " + (maxHeapSize / (1024 * 1024)) + " MB");
     }
 
     /**
@@ -41,10 +44,9 @@ public class Main {
         System.out.println("--------------------------------");
         System.out.println("Tole so sekvence vseh n-gramov in ponovitve vsakega n-grama v besedilu: ");
         String prebrano = preberiIzTxt();
-        List<String> nGrams = generateNGrams(n, prebrano);
-        List<String> cleaned = odstraniZnakce(nGrams);
-        Map<String, Integer> prestete = prestejPonovitve(cleaned);
-        izpisiSekvencoInPonovitve(prestete);
+        String cleaned = odstraniZnakce(prebrano);
+        Map<String, Integer> nGrams = generateNGrams(n, cleaned);
+        izpisiSekvencoInPonovitve(nGrams);
         System.out.println("--------------------------------");
     }
     /**
@@ -52,16 +54,15 @@ public class Main {
      * funkcija ki naredi vse za besedilo, ki ga vpisemo kot input scanner fora
      * ker bi morali vsako funkcijo posebej klicat in potem skranjevat v vmesne variablese je fajn
      * ce imamo samo eno funkcijo ki klice vse. Torej uporabimo to funkcijo in ona klice vse ostale in toj to
-     * @param n . Dolzina n grama
+     * @param n  Dolzina n grama
      * @param besedilo Besedilo iz katerega bomo delali n-grame
      */
     public static void narediVseInput(int n, String besedilo){
         System.out.println("--------------------------------");
         System.out.println("Tole so sekvence vseh n-gramov in ponovitve vsakega n-grama v besedilu: ");
-        List<String> nGrams = generateNGrams(n, besedilo);
-        List<String> cleaned = odstraniZnakce(nGrams);
-        Map<String, Integer> prestete = prestejPonovitve(cleaned);
-        izpisiSekvencoInPonovitve(prestete);
+        String cleaned = odstraniZnakce(besedilo);
+        Map<String, Integer> nGrams = generateNGrams(n, cleaned);
+        izpisiSekvencoInPonovitve(nGrams);
         System.out.println("--------------------------------");
     }
     /**
@@ -71,14 +72,14 @@ public class Main {
      */
     public static String preberiIzTxt() {
         // kle damo path do file-a ki vsebuje besedilo
-        Path filePath = Path.of("resources/350MB.txt");
+        Path filePath = Path.of("resources/613MB.txt");
         try {
             return Files.readString(filePath);
 
         } catch (IOException e) {
-            System.err.println("Napaka pri branju file-a " + e.getMessage());
+            System.err.println("Error reading file: " + e.getMessage());
         }
-        return "Napaka, pri branju besed iz file-a";
+        return "napaka, pri branju besed iz file-a";
     }
 
     /**
@@ -88,22 +89,23 @@ public class Main {
      * @param text Besedilo na podlagi katerega ustvarimo n-grame
      * @return A StringBuilder n gramov.
      */
-    public static List<String> generateNGrams(int n, String text) {
-        List<String> nGrams = new ArrayList<>();
-        String[] words = text.split(" ");
-        if (n <= 0 || n > words.length) {
-            System.out.println("Napacna vrednost n. Mora biti vecja od 0 in manjsa ali od stevila besed v textu");
-            return nGrams;
-        }
-        for (int i = 0; i <= words.length - n; i++) {
-            StringBuilder nGram = new StringBuilder();
-            for (int j = 0; j < n; j++) {
-                nGram.append(words[i + j]);
-                if (j < n - 1) {
-                    nGram.append(" ");
+    public static Map<String, Integer> generateNGrams(int n, String text) {
+        Map<String, Integer> nGrams = new HashMap<>();
+
+        String[] stavki = text.split("[.!?]");
+        System.out.println("Found sentences: " + stavki.length);
+
+        for (String stavek : stavki) {
+            String[] besede = stavek.split(" ");
+            for (int j = 0; j < besede.length - n; j++) {
+                String[] ngramArray = Arrays.copyOfRange(besede, j, j + n);
+                String ngram = String.join(" ", ngramArray);
+                if (nGrams.containsKey(ngram)) {
+                    nGrams.put(ngram, nGrams.get(ngram) + 1);
+                } else {
+                    nGrams.put(ngram, 1);
                 }
             }
-            nGrams.add(nGram.toString());
         }
         return nGrams;
     }
@@ -112,17 +114,12 @@ public class Main {
      * Ker mi samo splitamo samo po " ", se lahko v sekvencah pojavijo klicaji, dvopicja, vprasaji, vejice
      * Primer: "lep dan." ali "lep dan!"
      * Torej ta funkcija odstrani vse te neuporabne znakce; vejice in pike in klicaje in vprasaje...
-     * @param list List teh vseh sekvenc oziroma v nasem primeru bodo to n-grami
+     * @param text List teh vseh sekvenc oziroma v nasem primeru bodo to n-grami
      * @return a Map <String, Integer> list teh sekvenc brez teh znakcov
      */
-    public static List<String> odstraniZnakce(List<String> list) {
-        List<String> cleanedStrings = new ArrayList<>();
-        for (String signs : list) {
-            // Remove punctuation using regex
-            String cleaned = signs.replaceAll("[.,!?;:¡¿]", "");
-            cleanedStrings.add(cleaned);
-        }
-        return cleanedStrings;
+    public static String odstraniZnakce(String text) {
+        String cleaned = text.replaceAll("[,;:¡¿]", "");
+        return cleaned;
     }
 
     /**
@@ -149,7 +146,6 @@ public class Main {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
     }
-
 
 }
 
