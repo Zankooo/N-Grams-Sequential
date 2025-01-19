@@ -7,11 +7,11 @@ public class Main {
     public static void main(String[] args) {
         long maxHeapSize = Runtime.getRuntime().maxMemory();
         System.out.println("Max Heap Size: " + (maxHeapSize / (1024 * 1024)) + " MB");
+        long zacetek;
+        long konec;
 
-        // dodat moram time in milis ampak ne vem kko merit ker pac smo odvisni od nasega inputa
         Scanner scanner = new Scanner(System.in);
         System.out.println("--------------------------------");
-
 
         System.out.println("1. Bos vpisal besedilo");
         System.out.println("2. Bos bral iz external file-a: ");
@@ -23,14 +23,21 @@ public class Main {
             scanner.nextLine();
             System.out.print("Vpisi besedilo; ");
             String text = scanner.nextLine();
+            zacetek = System.currentTimeMillis();
             narediVseInput(n, text);
+            konec = System.currentTimeMillis();
         }
         else{
             System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
             int n = scanner.nextInt();
+            zacetek = System.currentTimeMillis();
             narediVseTxt(n);
+            konec = System.currentTimeMillis();
         }
         scanner.close();
+        // trajanje programa
+        System.out.println("Celoten proces je trajal: " + (konec - zacetek) + " ms");
+
     }
 
     /**
@@ -72,7 +79,7 @@ public class Main {
      */
     public static String preberiIzTxt() {
         // kle damo path do file-a ki vsebuje besedilo
-        Path filePath = Path.of("resources/613MB.txt");
+        Path filePath = Path.of("resources/123MB.txt");
         try {
             return Files.readString(filePath);
 
