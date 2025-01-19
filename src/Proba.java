@@ -13,7 +13,6 @@ public class Proba {
         removeHyphens();
         long zacetekT2 = System.currentTimeMillis();
         System.out.println("Celoten proces je trajal: " + (zacetekT2 - zacetekT1) + " ms");
-
     }
 
     //zgleda je problem ker imamo prevec podatkov v memoryju, torej moram pisati podatke

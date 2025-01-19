@@ -5,40 +5,30 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-
        // dodat moram time in milis ampak ne vem kko merit ker pac smo odvisni od nasega inputa
         Scanner scanner = new Scanner(System.in);
         System.out.println("--------------------------------");
-
-
         System.out.println("1. Bos vpisal besedilo");
         System.out.println("2. Bos bral iz external file-a: ");
         System.out.println();
         int kaj = scanner.nextInt();
         if (kaj == 1){
-            System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
+            System.out.print("Vpisi zeljeno dolzino n-gramov - n: ");
             int n = scanner.nextInt();
             scanner.nextLine();
             System.out.print("Vpisi besedilo; ");
             String text = scanner.nextLine();
-
             narediVseInput(n, text);
-
         }
         else{
-            System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
+            System.out.print("Vpisi zeljeno dolzino n-gramov - n: ");
             int n = scanner.nextInt();
-
             narediVseTxt(n);
         }
-
         scanner.close();
         long maxHeapSize = Runtime.getRuntime().maxMemory();
-        System.out.println("Max Heap Size: " + (maxHeapSize / (1024 * 1024)) + " MB");
-
+        System.out.println("Maksimalnen heap space je: " + (maxHeapSize / (1024 * 1024)) + " MB");
     }
-
-
 
     /**
      * FUNKCIJA narediVseTxt
@@ -65,7 +55,6 @@ public class Main {
      * @param n . Dolzina n grama
      * @param besedilo Besedilo iz katerega bomo delali n-grame
      */
-
     public static void narediVseInput(int n, String besedilo){
         System.out.println("--------------------------------");
         System.out.println("Tole so sekvence vseh n-gramov in ponovitve vsakega n-grama v besedilu: ");
@@ -82,14 +71,14 @@ public class Main {
      */
     public static String preberiIzTxt() {
         // kle damo path do file-a ki vsebuje besedilo
-        Path filePath = Path.of("resources/123MB.txt");
+        Path filePath = Path.of("resources/350MB.txt");
         try {
             return Files.readString(filePath);
 
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            System.err.println("Napaka pri branju file-a " + e.getMessage());
         }
-        return "napaka, pri branju besed iz file-a";
+        return "Napaka, pri branju besed iz file-a";
     }
 
     /**
@@ -100,15 +89,10 @@ public class Main {
      * @return A StringBuilder n gramov.
      */
     public static List<String> generateNGrams(int n, String text) {
-        //ustvarimo listo za ngrame
         List<String> nGrams = new ArrayList<>();
-        //vsak element v textu je sedaj element v array stringu.
-        // splitamo text po presledku, torej vsaka beseda gre na svoj index v array stringov
         String[] words = text.split(" ");
-        // preverjamo ce je n pravi, ce ni, koncamo program.
-        // in pravi ni ko je manjsi ali enak 0, 0gram ne obstaja, in ce je n vecji od dolzine vseh besed
         if (n <= 0 || n > words.length) {
-            System.out.println("Invalid n value. Ensure n > 0 and less than or equal to the number of words in the text.");
+            System.out.println("Napacna vrednost n. Mora biti vecja od 0 in manjsa ali od stevila besed v textu");
             return nGrams;
         }
         for (int i = 0; i <= words.length - n; i++) {
@@ -165,6 +149,7 @@ public class Main {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
     }
+
 
 }
 
