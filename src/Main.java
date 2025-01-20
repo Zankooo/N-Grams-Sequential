@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class Main {
+    static String filePath = "resources/613MB.txt";
     public static void main(String[] args) {
         long maxHeapSize = Runtime.getRuntime().maxMemory();
         System.out.println("Max Heap Size: " + (maxHeapSize / (1024 * 1024)) + " MB");
@@ -18,7 +19,7 @@ public class Main {
         System.out.println();
         int kaj = scanner.nextInt();
         if (kaj == 1){
-            System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
+            System.out.print("Vpisi dolzino n-gramov (ene sekvence): ");
             int n = scanner.nextInt();
             scanner.nextLine();
             System.out.print("Vpisi besedilo; ");
@@ -28,7 +29,7 @@ public class Main {
             konec = System.currentTimeMillis();
         }
         else{
-            System.out.print("Vpisi dolzino vsakega delcka, torej n: ");
+            System.out.print("Vpisi dolzino n-gramov (ene sekvence): ");
             int n = scanner.nextInt();
             zacetek = System.currentTimeMillis();
             narediVseTxt(n);
@@ -50,7 +51,7 @@ public class Main {
     public static void narediVseTxt(int n){
         System.out.println("--------------------------------");
         System.out.println("Tole so sekvence vseh n-gramov in ponovitve vsakega n-grama v besedilu: ");
-        String prebrano = preberiIzTxt();
+        String prebrano = preberiIzTxt(filePath);
         String cleaned = odstraniZnakce(prebrano);
         Map<String, Integer> nGrams = generateNGrams(n, cleaned);
         izpisiSekvencoInPonovitve(nGrams);
@@ -77,9 +78,9 @@ public class Main {
      * prebere besedilo iz txt file-a in ga shrani v String
      * @return vrne besedilo iz txt file kot String
      */
-    public static String preberiIzTxt() {
+    public static String preberiIzTxt(String path) {
         // kle damo path do file-a ki vsebuje besedilo
-        Path filePath = Path.of("resources/123MB.txt");
+        Path filePath = Path.of(path);
         try {
             return Files.readString(filePath);
 
@@ -100,7 +101,7 @@ public class Main {
         Map<String, Integer> nGrams = new HashMap<>();
 
         String[] stavki = text.split("[.!?]");
-        System.out.println("Found sentences: " + stavki.length);
+        System.out.println("Število povedi: " + stavki.length);
 
         for (String stavek : stavki) {
             String[] besede = stavek.split(" ");
