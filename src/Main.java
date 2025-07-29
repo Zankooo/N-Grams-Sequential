@@ -28,7 +28,7 @@ public class Main {
 
     public static void main(String[] args) {
         long maxHeapSize = Runtime.getRuntime().maxMemory();
-        System.out.println("Max Heap Size: " + (maxHeapSize / (1024 * 1024)) + " MB");
+        System.out.println("Max Heap Size (količina rama za JVM): " + (maxHeapSize / (1024 * 1024)) + " MB");
 
         long zacetek;
         long konec;
