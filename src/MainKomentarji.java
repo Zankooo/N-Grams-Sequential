@@ -101,9 +101,10 @@ public class MainKomentarji {
         //hash map za shranjevanje  n-gramov in njihovih frekvenc
         Map<String, Integer> nGrams = new HashMap<>();
         // razbijemo besedilo na locene stavke glede na locila
-        String[] stavki = text.split("[.!?]");
+        String[] povedi = text.split("[.!?]");
         //izpisemo koliko stavkov je
-        System.out.println("Število povedi: " + stavki.length);
+        System.out.println("Število povedi: ");
+        System.out.println(String.format("%,d", povedi.length).replace(",", "."));
 
 
         //text = "dan je lep. dan je dolg." n = 2
@@ -114,11 +115,11 @@ public class MainKomentarji {
         // "je dolg" → 1×
         // to naredi ta koda spodaj
 
-        for (int i = 0; i < stavki.length; i++) {
+        for (int i = 0; i < povedi.length; i++) {
             //stavek razdelimo na besede in jih shranimo v array stringov. Recimo stavek; "dan je lep sončen dan"
             // gre tkole -> besede = ["dan", "je", "lep", "sončen", "dan"]
-            String stavek = stavki[i];
-            String[] besede = stavek.split(" ");
+            String enaPoved = povedi[i];
+            String[] besede = enaPoved.split(" ");
 
             // besede.length - n -> poskrbi da ne gremo cez rob tabele
             // ustvarimo n-gramse
@@ -126,13 +127,14 @@ public class MainKomentarji {
             // kle je zgleda <= prav? to jutri preverit
             // "To je en lep dan" -> {"To", "je", "en", "lep", "dan"};
             // 5 - 3 = 2
-            // ugotovit ali je < ali je <= pač še kak stavek in kako drugo dolzino n-gramov
+            // ta for loop je tko strukturiran da pokrije vse besede in da zajame vse n-grame v povedi
             for (int j = 0; j <= besede.length - n; j++) {
                 // koliko zajamemo pac
                 // j=0 do j+n = 3 -> {"To", "je", "en"}
                 // j=1 do j+3=4 -> {"je", "en", "lep"}
                 // j=2 do j+3 = 5 -> {"en", "lep", "dan"}
                 // ta of range deluje na podlagi indeksov in zaden je eno vec kot, kot v pythonu za for loop
+                // vzame besede na teh indeksih, od indeksa j do indeksa (j + n), n (ne vključujoč zadnjega), torej predzadnji, (j+n)-1
                 String[] ngramArray = Arrays.copyOfRange(besede, j, j + n);
                 // in potem te arraye besed zdruzimo v string
                 String ngram = String.join(" ", ngramArray);
