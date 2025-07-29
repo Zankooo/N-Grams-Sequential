@@ -66,7 +66,7 @@ public class Main {
         String cleaned = odstraniZnakce(prebrano);
         Map<String, Integer> nGrams = generateNGrams(n, cleaned);
         Map<String, Double> relFrekvence = izracunajRelativneFrekvence(nGrams);
-        izpisiVse(nGrams, relFrekvence);
+        //izpisiVse(nGrams, relFrekvence);
         System.out.println("--------------------------------");
     }
 
@@ -75,7 +75,7 @@ public class Main {
         String cleaned = odstraniZnakce(besedilo);
         Map<String, Integer> nGrams = generateNGrams(n, cleaned);
         Map<String, Double> relFrekvence = izracunajRelativneFrekvence(nGrams);
-        izpisiVse(nGrams, relFrekvence);
+        //izpisiVse(nGrams, relFrekvence);
         System.out.println("--------------------------------");
     }
 

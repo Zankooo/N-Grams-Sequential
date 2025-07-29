@@ -34,7 +34,8 @@
 <hr>
 
 ## <ins> Testiranje </ins>
-### <ins>Za testiranje sem uporabil svoj lasten laptop: Macbook Pro, M1 Max, 64gb/2Tera. Java virtual machine (max heap size) sem dal na voljo 16,384 GB rama za izvajanje programa. </ins>
+### <ins>Za testiranje sem uporabil svoj lasten laptop: Macbook Pro, M1 Max, 64GB/2TB. Java virtual machine (max heap size) sem dal na voljo 16,384 GB rama za izvajanje programa. </ins>
+#### (Komp sem kupil za 1600eur :) )
 ### Testiranje je bilo opravljenju na petih različno velikih .txt file-ih.
 #### - 123MB -> <ins>1.</ins> n = 2, t = 21435ms; <ins>2.</ins> n = 3, t = 43535ms; <ins>3.</ins> n = 4, t = 66938ms; <ins>4.</ins> n = 5, t = 97387ms;
 #### - 234MB -> <ins>1.</ins> n = 2, t = 82482ms; <ins>2.</ins> n = 3, t = 151894ms; <ins>3.</ins> n = 4, t = 198564ms; <ins>4.</ins> n = 5, t = 208350ms;
