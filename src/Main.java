@@ -6,9 +6,6 @@ import java.util.*;
 public class Main {
 
     public static String izbiraTeksta() {
-        /**
-         * funkcija ki ti omogoca da izberes datoteko oz korpus oz tekst
-         */
         String[] datoteke = {"123MB.txt", "234MB.txt", "350MB.txt", "490MB.txt", "613MB.txt"};
         Scanner scanner = new Scanner(System.in);
         System.out.println("Izberi besedilo:");
@@ -23,22 +20,21 @@ public class Main {
                     return "resources/" + datoteke[izbira-1];
                 }
             } else {
-                scanner.next(); // Počisti napačen vnos
+                scanner.next();
             }
             System.out.println("Neveljavna izbira. Prosimo, vnesite številko med 1 in " + datoteke.length + ".");
         }
     }
 
-
     public static void main(String[] args) {
         long maxHeapSize = Runtime.getRuntime().maxMemory();
         System.out.println("Max Heap Size: " + (maxHeapSize / (1024 * 1024)) + " MB");
+
         long zacetek;
         long konec;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("--------------------------------");
-
         System.out.println("1. Bos vpisal besedilo");
         System.out.print("2. Bos bral iz external file-a: ");
         System.out.println();
@@ -98,18 +94,20 @@ public class Main {
         String[] povedi = text.split("[.!?]");
         System.out.println("Število povedi: " + povedi.length);
 
+
         for (int i = 0; i < povedi.length; i++) {
             String enaPoved = povedi[i].trim();
             if (enaPoved.isEmpty()) continue;
-
             String[] besede = enaPoved.split("\\s+");
             if (besede.length < n) continue;
-
             for (int j = 0; j <= besede.length - n; j++) {
                 String[] ngramArray = Arrays.copyOfRange(besede, j, j + n);
                 String ngram = String.join(" ", ngramArray).trim();
-                if (!ngram.isEmpty()) {
-                    nGrams.put(ngram, nGrams.getOrDefault(ngram, 0) + 1);
+
+                if (nGrams.containsKey(ngram)) {
+                    nGrams.put(ngram, nGrams.get(ngram) + 1);
+                } else {
+                    nGrams.put(ngram, 1);
                 }
             }
         }
@@ -121,7 +119,6 @@ public class Main {
         Map<String, Double> relativneFrekvence = new HashMap<>();
 
         for (String ngram : ngrams.keySet()) {
-            if (ngram.isEmpty()) continue;
             String[] parts = ngram.split(" ");
             if (parts.length == 0) continue;
             String zacetek = parts[0];
