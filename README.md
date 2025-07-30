@@ -39,14 +39,15 @@
 ### Javi virtual machine sem dal na voljo cca 16GB max heap size (rama) za izvajanje programa. Na trajanje programa je zelo pomembno koliko ga imamo na voljo, saj uporabljamo v programu podatkovno strukturo HashMap in kot input dajemo podatke ki so precej veliki. (HashMap in veliki podatki --> hitrost izvajanja programa odvisna od velikosti rama)</ins>
 ### Testiranje je bilo opravljenju na petih različno velikih .txt file-ih. Dolzina n-gramov pa je od 2 do 5. Tesitranje je bilo opravljeno brez printanja n-gramov z pojavitvami in relativnimi frekvencami. Če bi jih printali bi program trajal občutno dlje.
 
-| Tabela    | n = 2    | n = 3    | n = 4    | n = 5    |
-|-----------|----------|----------|----------|----------|
-| **123MB** | 9.684ms  | 13.412ms | 16.736ms | 16.809ms |
-| **234MB** | 23.200ms | 31.461ms | 36.221ms | 39.311ms |
-| **350MB** | 34.415ms | 50.562ms | 53.065ms | 56.041ms |
-| **490MB** | 35.260ms | 44.818ms | 55.335ms | 62.849ms |
-| **613MB** | 37.008ms | 55.121ms | 66.669ms | 76.804ms |
+| Tabela    | n = 2      | n = 3      | n = 4      | n = 5      |
+|-----------|------------|------------|------------|------------|
+| **123MB** | 9,684 sec  | 13,412 sec | 16,736 sec | 16,809 sec |
+| **234MB** | 23,200 sec | 31,461 sec | 36,221 sec | 39,311 sec |
+| **350MB** | 34,415 sec | 50,562 sec | 53,065 sec | 56,041 sec |
+| **490MB** | 35,260 sec | 44,818 sec | 55,335 sec | 62,849 sec |
+| **613MB** | 37,008 sec | 55,121 sec | 66,669 sec | 76,804 sec |
 
+#### Opomba: številke so zapisane v evropskem formatu, kjer vejica pomeni decimalko
 <hr>
 
 ## <ins>Pomembne opombe za uspešno delovanje programa</ins>
@@ -55,7 +56,6 @@
 ### https://drive.google.com/drive/folders/1GnL52MgBBja04Hhqun_TRghp_sVrtZ2F?usp=share_link
 
 <hr>
-
 
 ## <ins>Druge informacije</ins>
 ### - uporabljal sem trenutno najnovejšo verzijo Jave; JDK 24
