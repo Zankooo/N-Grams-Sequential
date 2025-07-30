@@ -10,7 +10,7 @@
 
 <hr>
 
-## <ins>Uporaba</ins>: Program uporabljamo tako da mu določimo dva argumenta. 
+## <ins>Uporaba</ins>: Program uporabljamo tako, da mu določimo dva argumenta. 
 ### - prvi je neko dolgo besedilo in,
 ### - drugi n, ki je dolžina n-gramov.
 
@@ -34,25 +34,29 @@
 <hr>
 
 ## <ins> Testiranje </ins>
-### <ins>Za testiranje sem uporabil svoj lasten laptop: Apple MacBook Pro, M1 Max, 64GB/2TB. Java virtual machine (max heap size) sem dal na voljo 16,384 GB rama za izvajanje programa. </ins>
-#### (Komp sem kupil za 1600eur :) )
-### Testiranje je bilo opravljenju na petih različno velikih .txt file-ih.
-#### - 123MB -> <ins>1.</ins> n = 2, t = 21435ms; <ins>2.</ins> n = 3, t = 43535ms; <ins>3.</ins> n = 4, t = 66938ms; <ins>4.</ins> n = 5, t = 97387ms;
-#### - 234MB -> <ins>1.</ins> n = 2, t = 82482ms; <ins>2.</ins> n = 3, t = 151894ms; <ins>3.</ins> n = 4, t = 198564ms; <ins>4.</ins> n = 5, t = 208350ms;
-#### - 350MB -> <ins>1.</ins> n = 2, t = 121338ms; <ins>2.</ins> n = 3, t = 207659ms; <ins>3.</ins> n = 4, t = 261413ms; <ins>4.</ins> n = 5, t = 282025ms;
-#### - 490MB -> <ins>1.</ins> n = 2, t = 62269ms; <ins>2.</ins> n = 3, t = 129345ms; <ins>3.</ins> n = 4, t = 189522ms; <ins>4.</ins> n = 5, t = 234982ms;
-#### - 613MB -> <ins>1.</ins> n = 2, t = 75392ms; <ins>2.</ins> n = 3, t = 151535ms; <ins>3.</ins> n = 4, t = 227903ms; <ins>4.</ins> n = 5, t = 285432ms;
-###  
+### Za testiranje sem uporabil svoj lasten laptop: <ins>Apple MacBook Pro, M1 Max, 64GB/2TB</ins>.
+#### (Komp sem kupil za 1600eur in še 16 inch je :) )
+### Javi virtual machine sem dal na voljo cca 16GB max heap size (rama) za izvajanje programa. Na trajanje programa je zelo pomembno koliko ga imamo na voljo, saj uporabljamo v programu podatkovno strukturo HashMap in kot input dajemo podatke ki so precej veliki. (HashMap in veliki podatki --> hitrost izvajanja programa odvisna od velikosti rama)</ins>
+### Testiranje je bilo opravljenju na petih različno velikih .txt file-ih. Dolzina n-gramov pa je od 2 do 5. Tesitranje je bilo opravljeno brez printanja n-gramov z pojavitvami in relativnimi frekvencami. Če bi jih printali bi program trajal občutno dlje.
+
+| Tabela    | n = 2    | n = 3    | n = 4    | n = 5    |
+|-----------|----------|----------|----------|----------|
+| **123MB** | 9.684ms  | 13.412ms | 16.736ms | 16.809ms |
+| **234MB** | 23.200ms | 31.461ms | 36.221ms | 39.311ms |
+| **350MB** | 34.415ms | 50.562ms | 53.065ms | 56.041ms |
+| **490MB** | 35.260ms | 44.818ms | 55.335ms | 62.849ms |
+| **613MB** | 37.008ms | 55.121ms | 66.669ms | 76.804ms |
+
 <hr>
 
-## <ins>Pomembne opombe o delovanju programa: </ins>
+## <ins>Pomembne opombe za uspešno delovanje programa</ins>
 ### Program te na začetku vpraša; ali želiš vpisati besedilo kot input ali pa boš bral besede iz external file-a (kot input sem dal možnost samo za to, da sem lahko testiral na zelo kratkem besedilu.)
-### Ko pa izbereš "naravno pot" oziroma daš 2 (da boš bral iz external file-a), pa je pomembno da pred tem ustvariš direktorij z imenom *resources* in v njega daš file z besedilom. Na voljo so na tej povezavi: 
+### Ko pa izbereš "naravno pot" oziroma daš 2 (da boš bral iz external file-a), pa je pomembno, da pred tem ustvariš direktorij z imenom *resources* (ustvari ga v mapi projekta, ne v src) in v njega daš datoteke z besedili. Datoteke z besedili so na voljo na tej povezavi: 
 ### https://drive.google.com/drive/folders/1GnL52MgBBja04Hhqun_TRghp_sVrtZ2F?usp=share_link
 
- 
-
 <hr>
 
-## <ins>Največji problemi pri implementaciji</ins>
-### Največji problem mi je zagotovo predstavljal *error heap space*. Torej koliko memory-ja (rama) lahko Java uporabi na računalniku. Imel sem 2g vendar to ni bilo dosti in sem moral povečati da je nato delovalo pravilno! 
+
+## <ins>Druge informacije</ins>
+### - uporabljal sem trenutno najnovejšo verzijo Jave; JDK 24
+### - pri izdelovanju programa sem se posluževal umetne inteligence - predvsem ChatGPT-4o, 
