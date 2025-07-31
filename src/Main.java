@@ -30,8 +30,8 @@ public class Main {
         long maxHeapSize = Runtime.getRuntime().maxMemory();
         System.out.println("Max Heap Size (količina rama za JVM): " + (maxHeapSize / (1024 * 1024)) + " MB");
 
-        long zacetek;
-        long konec;
+        double zacetek;
+        double konec;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("--------------------------------");
@@ -40,7 +40,7 @@ public class Main {
         System.out.println();
         int kaj = scanner.nextInt();
         if (kaj == 1) {
-            System.out.print("Vpisi dolzino n-gramov (ene sekvence) (1-5): ");
+            System.out.print("Vpisi dolzino n-gramov (ene sekvence) (2-5): ");
             int n = scanner.nextInt();
             scanner.nextLine();
             System.out.print("Vpisi besedilo; ");
@@ -49,14 +49,17 @@ public class Main {
             narediVseInput(n, text);
             konec = System.currentTimeMillis();
         } else {
-            System.out.print("Vpisi dolzino n-gramov (ene sekvence) (1-5): ");
+            System.out.print("Vpisi dolzino n-gramov (ene sekvence) (2-5): ");
             int n = scanner.nextInt();
             zacetek = System.currentTimeMillis();
             narediVseTxt(n);
             konec = System.currentTimeMillis();
         }
-        scanner.close();
-        System.out.println("\u001B[32m✔ ⏱ Celoten proces je trajal: " + (konec - zacetek) + " ms\u001B[0m");
+
+        double casIzvedbeSekunde = (konec - zacetek) / 1000;
+
+        String evropskaNotacijaCasIzvedbeSec = String.format("%.2f", casIzvedbeSekunde).replace('.', ',');
+        System.out.println("\u001B[32m✔ ⏱ Celoten sekvenčni proces je trajal: " + evropskaNotacijaCasIzvedbeSec + " sec\u001B[0m");
     }
 
     public static void narediVseTxt(int n) {
