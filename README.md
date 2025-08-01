@@ -52,14 +52,14 @@
 
 ## <ins>Pomembne opombe za uspešen zagon programa (step by step)</ins>
 ### 1. Če programa še nimaš lokalno, ga pridobiš z komando v terminal:
-### ` git clone https://github.com/Zankooo/N-Grams-Sequential.git `
+#### ` git clone https://github.com/Zankooo/N-Grams-Sequential.git `
 ### 2. V root direktoriju ustvariš direktorij 'resources' in vanj daš datoteke iz tega linka: 
 ### https://drive.google.com/drive/folders/1GnL52MgBBja04Hhqun_TRghp_sVrtZ2F?usp=share_link 
 ### 3. Program nato lahko poženeš preko po želji izbranega IDE (Visual Studio, Intellij) in mora delovati!
 ### 4. Če pa poganjaš program preko Terminala iz src direktorija z komandama:
-### ` javac Main.java && java Main `
+#### ` javac Main.java && java Main `
 ### pa zelo verjetno nastane težava zaradi 'Working direktorija'. To rešiš tako da v kodi manualno spremeniš path v funkciji 'izbiraTeksta'. Pred resources moraš dodati dve piki in slash. Torej popravljena cela vrstica: 
-### `  return "../resources/" + datoteke[izbira-1]; `
+#### `  return "../resources/" + datoteke[izbira-1]; `
 
 ## <ins>Dodatne informacije o delovanju programa </ins>
 ### Program te na začetku vpraša; ali želiš vpisati besedilo kot input ali pa boš bral besede iz external file-a (kot input sem dal možnost samo za to, da sem lahko testiral na zelo kratkem besedilu.). Za delovanje po programa po navodilih pa izbereš drugo možnost s pritiskom na '2'. 
