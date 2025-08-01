@@ -5,26 +5,7 @@ import java.util.*;
 
 public class Main {
 
-    public static String izbiraTeksta() {
-        String[] datoteke = {"123MB.txt", "234MB.txt", "350MB.txt", "490MB.txt", "613MB.txt"};
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Izberi besedilo:");
-        for (int i = 0; i < datoteke.length; i++) {
-            System.out.println((i+1) + ". " + datoteke[i]);
-        }
-        while (true) {
-            System.out.print("Vaša izbira (1-" + datoteke.length + "): ");
-            if (scanner.hasNextInt()) {
-                int izbira = scanner.nextInt();
-                if (izbira >= 1 && izbira <= datoteke.length) {
-                    return "resources/" + datoteke[izbira-1];
-                }
-            } else {
-                scanner.next();
-            }
-            System.out.println("Neveljavna izbira. Prosimo, vnesite številko med 1 in " + datoteke.length + ".");
-        }
-    }
+
 
     public static void main(String[] args) {
         long maxHeapSize = Runtime.getRuntime().maxMemory();
@@ -61,7 +42,7 @@ public class Main {
         String evropskaNotacijaCasIzvedbeSec = String.format("%.2f", casIzvedbeSekunde).replace('.', ',');
         System.out.println("\u001B[32m✔ ⏱ Celoten sekvenčni proces je trajal: " + evropskaNotacijaCasIzvedbeSec + " sec\u001B[0m");
     }
-
+    // ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
     public static void narediVseTxt(int n) {
         System.out.println("--------------------------------");
         String filePath = izbiraTeksta();
@@ -82,15 +63,41 @@ public class Main {
         System.out.println("--------------------------------");
     }
 
+    // ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
+
+    public static String izbiraTeksta() {
+        String[] datoteke = {"123MB.txt", "234MB.txt", "350MB.txt", "490MB.txt", "613MB.txt"};
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Izberi besedilo:");
+        for (int i = 0; i < datoteke.length; i++) {
+            System.out.println((i+1) + ". " + datoteke[i]);
+        }
+        while (true) {
+            System.out.print("Vaša izbira (1-" + datoteke.length + "): ");
+            if (scanner.hasNextInt()) {
+                int izbira = scanner.nextInt();
+                if (izbira >= 1 && izbira <= datoteke.length) {
+                    return "resources/" + datoteke[izbira-1];
+                }
+            } else {
+                scanner.next();
+            }
+            System.out.println("Neveljavna izbira. Prosimo, vnesite številko med 1 in " + datoteke.length + ".");
+        }
+    }
+
     public static String preberiIzTxt(String path) {
         Path filePath = Path.of(path);
         try {
             return Files.readString(filePath);
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            System.err.println("Napaka pri branju file-a: " + e.getMessage());
+            System.out.println("Čisto možno je, da problem pri navedbi 'Working direktorija' (v Intellij je ponavadi to root folder), drugje lahko ni!");
         }
         return "napaka, pri branju besed iz file-a";
     }
+
+    // ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
 
     public static Map<String, Integer> generateNGrams(int n, String text) {
         Map<String, Integer> nGrams = new HashMap<>();
