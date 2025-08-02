@@ -42,11 +42,11 @@
 
 Tabela    | n = 2     | n = 3     | n = 4     | n = 5
 ----------|-----------|-----------|-----------|-----------
-**123MB** | 7.68 sec  | 11.41 sec | 14.74 sec | 14.81 sec 
-**234MB** | 21.20 sec | 29.46 sec | 34.22 sec | 37.31 sec 
-**350MB** | 32.41 sec | 48.56 sec | 51.07 sec | 54.04 sec 
-**490MB** | 33.26 sec | 42.82 sec | 53.34 sec | 60.85 sec 
-**613MB** | 35.01 sec | 53.12 sec | 64.67 sec | 74.80 sec
+**123MB** | 7,68 sec  | 11,41 sec | 14,74 sec | 14,81 sec 
+**234MB** | 21,20 sec | 29,46 sec | 34,22 sec | 37,31 sec 
+**350MB** | 32,41 sec | 48,56 sec | 51,07 sec | 54,04 sec 
+**490MB** | 33,26 sec | 42,82 sec | 53,34 sec | 60,85 sec 
+**613MB** | 35,01 sec | 53,12 sec | 64,67 sec | 74,80 sec
 
 
 #### Opomba: številke so zapisane v evropskem formatu, kjer vejica pomeni decimalko
