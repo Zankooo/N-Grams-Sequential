@@ -74,5 +74,5 @@
 ### Primarno sem si pri izdelovanju projekta pomagal z znanjem pridobljenim na predavanjih in vajah:
 ### https://e.famnit.upr.si/course/view.php?id=6182 - letošnja eučilnica
 ### https://e.famnit.upr.si/course/view.php?id=4943 - eučilnica preteklih let
-### Nekajkrat pa je sem poiskal pomoč tudi pri umetni inteligenci: ChatGPT-4o 
+### Nekajkrat pa sem poiskal pomoč tudi pri umetni inteligenci: ChatGPT-4o 
 
