@@ -4,15 +4,13 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class Main {
-
+    private static double zacetek;
+    private static double konec;
 
 
     public static void main(String[] args) {
         long maxHeapSize = Runtime.getRuntime().maxMemory();
         System.out.println("Max Heap Size (količina rama za JVM): " + (maxHeapSize / (1024 * 1024)) + " MB");
-
-        double zacetek;
-        double konec;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("--------------------------------");
@@ -32,8 +30,8 @@ public class Main {
         } else {
             System.out.print("Vpisi dolzino n-gramov (ene sekvence) (2-5): ");
             int n = scanner.nextInt();
-            zacetek = System.currentTimeMillis();
             narediVseTxt(n);
+            
             konec = System.currentTimeMillis();
         }
 
@@ -46,6 +44,7 @@ public class Main {
     public static void narediVseTxt(int n) {
         System.out.println("--------------------------------");
         String filePath = izbiraTeksta();
+        zacetek = System.currentTimeMillis();
         String prebrano = preberiIzTxt(filePath);
         String cleaned = odstraniZnakce(prebrano);
         Map<String, Integer> nGrams = generateNGrams(n, cleaned);
