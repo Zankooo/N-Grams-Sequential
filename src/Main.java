@@ -24,7 +24,6 @@ public class Main {
             scanner.nextLine();
             System.out.print("Vpisi besedilo; ");
             String text = scanner.nextLine();
-            zacetek = System.currentTimeMillis();
             narediVseInput(n, text);
             konec = System.currentTimeMillis();
         } else {
@@ -55,6 +54,7 @@ public class Main {
 
     public static void narediVseInput(int n, String besedilo) {
         System.out.println("--------------------------------");
+        zacetek = System.currentTimeMillis();
         String cleaned = odstraniZnakce(besedilo);
         Map<String, Integer> nGrams = generateNGrams(n, cleaned);
         Map<String, Double> relFrekvence = izracunajRelativneFrekvence(nGrams);
