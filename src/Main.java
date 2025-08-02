@@ -92,7 +92,8 @@ public class Main {
             return Files.readString(filePath);
         } catch (IOException e) {
             System.err.println("Napaka pri branju file-a: " + e.getMessage());
-            System.out.println("Čisto možno je, da problem pri navedbi 'Working direktorija' (v Intellij je ponavadi to root folder), drugje lahko ni!");
+            System.err.println("Preverite če ste sploh ustvarili mapo 'resources' in vanjo dali .txt datoteke! Če tega niste storili preberite README in to naredite!");
+            System.out.println("Čisto možno pa je, da problem pri navedbi 'Working direktorija' (v Intellij je ponavadi to root folder), drugje lahko ni! Predlagamo pogon v Intellij ali VS Code");
         }
         return "napaka, pri branju besed iz file-a";
     }
