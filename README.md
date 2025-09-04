@@ -2,7 +2,8 @@
 
 Podatkovna analiza. Tekstovna analiza
 
-## <ins>Kaj dela</ins>: Program, ki pokaže: 
+## Kaj dela
+Program, ki pokaže: 
 - koliko n-gramov je v nekem besedilu,
 - kolikokrat se n-grami ponovijo v tem besedilu,
 - koliko je relativna frekvenca na podlagi le prve besede in
