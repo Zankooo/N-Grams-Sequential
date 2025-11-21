@@ -1,4 +1,4 @@
-# Analysis of N-grams (Simple Text Analysis) – Sequential Implementation
+# Analysis of N-grams 
 
 [🇸🇮 Read in Slovenian](./slo-readme/README.md)
 
