@@ -1,6 +1,6 @@
 # Analysis of N-grams (simple text analysis) - zaporedena (sekvenčna) izvedba
 
-Podatkovna analiza. Tekstovna analiza
+Analiza n-gramov je ena od temeljnih tehnik v NLP in se uporablja v številnih realnih sistemih — med drugim tudi v Google Search. Iskalniki uporabljajo n-grame za boljše razumevanje, kako se besede pojavljajo skupaj, kar pomaga pri predvidevanju uporabnikovih namenov, popravljanju črkovalnih napak, iskanju sinonimov in rangiranju rezultatov. Poleg tega se n-grami uporabljajo v priporočilih, spam detekciji, suggestions sistemih, avtomatskem dopolnjevanju ter pri jezikovnem modeliranju v strojnih prevajalnikih.
 
 ## 🧩 Kaj dela
 Program, ki pokaže: 
@@ -8,7 +8,6 @@ Program, ki pokaže:
 - kolikokrat se n-grami ponovijo v tem besedilu,
 - koliko je relativna frekvenca na podlagi le prve besede in
 - koliko časa (v sekundah) je cel proces trajal.
-
 
 
 ## ⚙️ Uporaba
@@ -67,13 +66,4 @@ pa zelo verjetno nastane težava zaradi 'Working direktorija'. To rešiš tako d
 Program te na začetku vpraša; ali želiš vpisati besedilo kot input ali pa boš bral besede iz external file-a (kot input sem dal možnost samo za to, da sem lahko testiral na zelo kratkem besedilu.). Za delovanje po programa po navodilih pa izbereš drugo možnost s pritiskom na '2'. 
 
 
-
-## ➕ Druge informacije
-- uporabljal sem trenutno najnovejšo verzijo Jave; JDK 24
-
-## 📚 Viri in literatura
-Primarno sem si pri izdelovanju projekta pomagal z znanjem pridobljenim na predavanjih in vajah:
-- https://e.famnit.upr.si/course/view.php?id=6182 - letošnja eučilnica
-- https://e.famnit.upr.si/course/view.php?id=4943 - eučilnica preteklih let
-- Nekajkrat pa sem poiskal pomoč tudi pri umetni inteligenci: ChatGPT-4o 
 
