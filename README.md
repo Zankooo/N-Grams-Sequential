@@ -1,69 +1,88 @@
-# Analysis of N-grams (simple text analysis) - zaporedena (sekvenčna) izvedba
+# Analysis of N-grams (Simple Text Analysis) – Sequential Implementation
 
-Analiza n-gramov je ena od temeljnih tehnik v NLP in se uporablja v številnih realnih sistemih — med drugim tudi v Google Search. Iskalniki uporabljajo n-grame za boljše razumevanje, kako se besede pojavljajo skupaj, kar pomaga pri predvidevanju uporabnikovih namenov, popravljanju črkovalnih napak, iskanju sinonimov in rangiranju rezultatov. Poleg tega se n-grami uporabljajo v priporočilih, spam detekciji, suggestions sistemih, avtomatskem dopolnjevanju ter pri jezikovnem modeliranju v strojnih prevajalnikih.
+[🇸🇮 Read in Slovenian](./slo-readme/README.md)
 
-## 🧩 Kaj dela
-Program, ki pokaže: 
-- koliko n-gramov je v nekem besedilu,
-- kolikokrat se n-grami ponovijo v tem besedilu,
-- koliko je relativna frekvenca na podlagi le prve besede in
-- koliko časa (v sekundah) je cel proces trajal.
+N-gram analysis is one of the fundamental techniques in NLP and is used in many real-world systems — including Google Search. Search engines use n-grams to better understand how words appear together, which helps them predict user intent, correct spelling errors, find synonyms, and rank results. N-grams are also used in recommendation systems, spam detection, suggestion engines, autocomplete features, and in language modelling for machine translation.
 
+## 🧩 What It Does
+This program shows:
+- how many n-grams appear in a given text,
+- how many times each n-gram occurs,
+- what the relative frequency is (based on the first word only),
+- and how long (in seconds) the full process took.
 
-## ⚙️ Uporaba
-Program uporabljamo tako, da mu določimo dva argumenta:
- - prvi je neko dolgo besedilo in,
- - drugi n, ki je dolžina n-gramov.
+## ⚙️ Usage
+The program accepts two arguments:
+1. A long text input,
+2. An integer *n* — the length of the n-grams.
 
-## 🧪 Primer uporabe
-Inputa (argumenta) -> 
-1. Besedilo; "Danes je lep dan, lep dan je danes."
+## 🧪 Example
+Input arguments:
+1. Text: “Today is a nice day, a nice day today.”
 2. n = 2.
 
-## 📝 Rezultati 
-(ngram -> pojavitev -> relativna frekvenca) -> 
-- danes je -> 1 -> 100%
-- je lep -> 1 -> 50%
-- lep dan -> 2 -> 100%
-- dan lep -> 1 -> 50%
-- dan je -> 1 -> 50%
-- je danes -> 1 -> 50%
-Celoten proces je trajal: 10 ms
+## 📝 Results
+(ngram → occurrences → relative frequency)
+- today is → 1 → 100%
+- is a → 1 → 50%
+- a nice → 2 → 100%
+- nice day → 1 → 50%
+- day a → 1 → 50%
+- day today → 1 → 50%
 
-## 🏁 Testiranje 
-Za testiranje (in tudi za implementacijo) sem uporabil svoj lasten laptop: <ins>Apple MacBook Pro, M1 Max, 64GB/2TB</ins>.
-(Komp sem kupil za 1600eur in še 16 inch je :) )
 
-Javi virtual machine sem dal na voljo cca 16GB max heap size (rama) za izvajanje programa. Na trajanje programa je zelo pomembno koliko ga imamo na voljo, saj uporabljamo v programu podatkovno strukturo HashMap in kot input dajemo podatke ki so precej veliki. (HashMap in veliki podatki --> hitrost izvajanja programa odvisna od velikosti rama)</ins>
-Testiranje je bilo opravljenju na petih različno velikih .txt datotekah. Dolžina n-gramov pa je od 2 do 5. Opravljeno je bilo brez printanja n-gramov z pojavitvami in relativnimi frekvencami. Če bi jih printali bi program trajal občutno dlje. Če želimo printati n-grame samo odkomentiramo vrstico v funkciji 'narediVseTxt'
+Total processing time: 10 ms
 
-### Tabela rezultatov testiranja:
+## 🏁 Testing Setup
+Testing (and implementation) was performed on my personal laptop:  
+**Apple MacBook Pro, M1 Max, 64GB / 2TB.**  
+(I bought the laptop for €1600 and it’s the 16-inch model :) )
 
-| Tabela    | n = 2     | n = 3     | n = 4     | n = 5     |
+The Java virtual machine was given approximately **16GB max heap size** for program execution.  
+Available RAM heavily affects execution time, because the program uses a `HashMap` and processes very large input data.  
+More RAM → faster execution.
+
+Tests were run on five different `.txt` files of various sizes, with n-gram lengths from 2 to 5.  
+All tests were done **without printing** individual n-grams, because printing would drastically slow down execution.  
+If you want to print n-grams, simply uncomment the print line inside the `narediVseTxt` function.
+
+### Testing Table
+
+| File Size | n = 2     | n = 3     | n = 4     | n = 5     |
 |-----------|-----------|-----------|-----------|-----------|
-| **123MB** | 7,68 sec  | 11,41 sec | 14,74 sec | 14,81 sec |
-| **234MB** | 21,20 sec | 29,46 sec | 34,22 sec | 37,31 sec |
-| **350MB** | 32,41 sec | 48,56 sec | 51,07 sec | 54,04 sec |
-| **490MB** | 33,26 sec | 42,82 sec | 53,34 sec | 60,85 sec |
-| **613MB** | 35,01 sec | 53,12 sec | 64,67 sec | 74,80 sec |
+| **123MB** | 7.68 sec  | 11.41 sec | 14.74 sec | 14.81 sec |
+| **234MB** | 21.20 sec | 29.46 sec | 34.22 sec | 37.31 sec |
+| **350MB** | 32.41 sec | 48.56 sec | 51.07 sec | 54.04 sec |
+| **490MB** | 33.26 sec | 42.82 sec | 53.34 sec | 60.85 sec |
+| **613MB** | 35.01 sec | 53.12 sec | 64.67 sec | 74.80 sec |
 
-#### Opomba: 
-Številke so zapisane v evropskem formatu, kjer vejica pomeni decimalko!
+#### Note:
+The numbers follow the **European decimal format**, where commas represent decimals.
 
 
-## 🚩 Pomembne opombe za uspešen zagon programa
-1. Če programa še nimaš lokalno, ga pridobiš z komando v terminal:
+## 🚩 Important notes for running the project
+1. If you do not have project locally already, use this command in Terminal:
 ` git clone https://github.com/Zankooo/N-Grams-Sequential.git `
-2. V root direktoriju ustvariš direktorij 'resources' in vanj daš datoteke iz tega linka: 
+2. In root directory create directory named'resources' and put following files in: 
 https://drive.google.com/drive/folders/1GnL52MgBBja04Hhqun_TRghp_sVrtZ2F?usp=share_link 
-3. Program nato lahko poženeš preko po želji izbranega IDE (Visual Studio, Intellij) in mora delovati!
-4. Če pa poganjaš program preko Terminala iz src direktorija z komandama:
+3. Program now you can run in whatever Integrated development environment - IDE (Visual Studio, Intellij..) and it should work!
+4. If you run it from Terminal from src directory use this two commands:
 ` javac Main.java && java Main `
-pa zelo verjetno nastane težava zaradi 'Working direktorija'. To rešiš tako da v kodi manualno spremeniš path v funkciji 'izbiraTeksta'. Pred resources moraš dodati dve piki in slash. Torej popravljena cela vrstica: 
+and probably you will face a problem about 'Working directory'. You can solve it manually; change in path function 'izbiraTeksta'. Before the resources you must put two dots and slash. So fixed line is: 
 `  return "../resources/" + datoteke[izbira-1]; `
 
-## 💬 Dodatne informacije o delovanju programa
-Program te na začetku vpraša; ali želiš vpisati besedilo kot input ali pa boš bral besede iz external file-a (kot input sem dal možnost samo za to, da sem lahko testiral na zelo kratkem besedilu.). Za delovanje po programa po navodilih pa izbereš drugo možnost s pritiskom na '2'. 
+
+## 💬 Additional Information About Program Behavior
+
+At the start, the program asks whether you want to enter text manually as input or read the words from an external file.  
+(The manual input option exists only so I could test the program quickly on very short text.)  
+
+For correct usage according to the assignment, choose the second option by pressing **'2'**.
 
 
+## ⚡ Improved Version of the Program
 
+This program is implemented sequentially.  
+However, due to its structure, it offers clear opportunities for optimisation.  
+An optimised **parallel (multi-core, multithreaded)** version is available here:  
+https://github.com/Zankooo/N-Grams-Paralell
